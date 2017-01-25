@@ -1,0 +1,9 @@
+{
+	"description": "City of Melbourne parking data",
+	"date": "2014",
+	"home": "https://data.melbourne.vic.gov.au/",
+	"sensor_type": "parking",
+	"data_type": "historical",
+	"format": "csv",
+	"download_url": "http://data.melbourne.vic.gov.au/api/views/mq3i-cbxd/rows.csv?accessType=DOWNLOAD&api_foundry=true"
+}
