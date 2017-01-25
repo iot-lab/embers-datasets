@@ -1,0 +1,9 @@
+{
+	"description": "City of Aarhus traffic data (dataset 2)",
+	"date": "2014",
+	"home": "http://iot.ee.surrey.ac.uk:8080/datasets.html",
+	"sensor_type": "traffic",
+	"data_type": "historical",
+	"format": "csv",
+	"download_url": "http://iot.ee.surrey.ac.uk:8080/datasets/traffic/traffic_june_sep/citypulse_traffic_raw_data_aarhus_aug_sep_2014.tar.gz"
+}

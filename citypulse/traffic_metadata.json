@@ -1,0 +1,8 @@
+{
+	"description": "City of Aarhus traffic data (metadata)",
+	"date": "2014",
+	"home": "http://iot.ee.surrey.ac.uk:8080/datasets.html",
+	"data_type": "metadata",
+	"format": "csv",
+	"download_url": "http://iot.ee.surrey.ac.uk:8080/datasets/traffic/trafficMetaData.csv"
+}
