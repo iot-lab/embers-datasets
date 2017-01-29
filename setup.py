@@ -17,4 +17,8 @@ setup(
     package_dir    = {"": "src"},
     package_data   = {PACKAGE: ['*/*.json']},
     namespace_packages = [PACKAGE],
+
+    install_requires = [
+        "requests",
+    ],
 )
