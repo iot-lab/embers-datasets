@@ -13,8 +13,8 @@ setup(
     url            = "http://www.embers.city/",
     keywords       = ["Open Data", "Smart City"],
     license        = open('COPYING.md').read(),
-    packages       = [PACKAGE] + [PACKAGE+"."+p for p in find_packages()],
-    package_dir    = {PACKAGE: "."},
+    packages       = find_packages("src"),
+    package_dir    = {"": "src"},
     package_data   = {PACKAGE: ['*/*.json']},
     namespace_packages = [PACKAGE],
 )
