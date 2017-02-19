@@ -14,7 +14,7 @@ class Traffic(object):
         wget = Downloader(self.tarball.download_url)
         wget.download()
         wget.extract()
-        wget = Downloader(self.tarball.download_url)
+        wget = Downloader(self.metadata.download_url)
         wget.download()
 
 
