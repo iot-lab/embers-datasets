@@ -18,6 +18,9 @@ class Traffic(object):
         wget.download()
 
 
+    def get_source(self, device_id):
+        return self
+
     def __iter__(self):
         return self
 
