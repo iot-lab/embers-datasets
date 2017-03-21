@@ -16,7 +16,7 @@ setup(
     packages       = find_packages("src"),
     package_dir    = {"": "src"},
     package_data   = {PACKAGE: ['*/*.json']},
-    namespace_packages = [PACKAGE],
+    namespace_packages = ["embers", PACKAGE],
 
     install_requires = [
         "requests",
