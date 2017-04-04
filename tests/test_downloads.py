@@ -7,6 +7,8 @@ import os
 def test_traffic_download():
     x = traffic.Traffic()
     x.download()
+    os.chdir("embers.datasets.citypulse")
+
     dest_dir = "traffic_june_sep"
     metadata = "trafficMetaData.csv"
 
