@@ -6,7 +6,7 @@ class Downloader(object):
 
     def __init__(self, url, filename=None):
         self.url = url
-        self.filename = filename if filename else os.path.basename(url)
+        self.filename = filename or os.path.basename(url)
 
     def download(self):
         r = requests.get(self.url, stream=True)
