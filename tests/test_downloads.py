@@ -4,10 +4,10 @@ import embers.datasets.citypulse.traffic as traffic
 import os
 
 
-def test_traffic_download():
+def test_traffic_download(monkeypatch):
     x = traffic.Traffic()
     x.download()
-    os.chdir("embers.datasets.citypulse")
+    monkeypatch.chdir("embers.datasets.citypulse")
 
     dest_dir = "traffic_june_sep"
     metadata = "trafficMetaData.csv"
