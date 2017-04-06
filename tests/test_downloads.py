@@ -32,3 +32,21 @@ def test_pollution_download(monkeypatch):
     metadata = "trafficMetaData.csv"
 
     check_dataset(dest_dir, metadata)
+
+
+def test_traffic_sources():
+    x = traffic.Traffic()
+    s = x.get_source(0)
+    d = s.next()
+
+    assert "vehicleCount" in d
+    assert "avgSpeed" in d
+
+
+def test_pollution_sources():
+    x = pollution.Pollution()
+    s = x.get_source(0)
+    d = s.next()
+
+    assert "carbon_monoxide" in d
+    assert "nitrogen_dioxide" in d
