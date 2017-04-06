@@ -1,8 +1,5 @@
-import pytest
-
 import embers.datasets.citypulse.traffic as traffic
 import embers.datasets.citypulse.pollution as pollution
-import os
 
 
 def test_traffic_download(monkeypatch):
@@ -17,6 +14,7 @@ def test_traffic_download(monkeypatch):
 
 
 def check_dataset(dest_dir, metadata):
+    import os
     assert os.path.isdir(dest_dir)
     assert len(os.listdir(dest_dir)) == 449
     assert os.path.isfile(metadata)
