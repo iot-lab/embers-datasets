@@ -10,7 +10,7 @@ def test_traffic_download(monkeypatch):
     x.download()
     monkeypatch.chdir("embers.datasets.citypulse")
 
-    dest_dir = "traffic_june_sep"
+    dest_dir = "traffic_june_sep"  # dataset is aug_sep_2014
     metadata = "trafficMetaData.csv"
 
     check_dataset(dest_dir, metadata)
