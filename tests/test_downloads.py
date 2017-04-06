@@ -50,3 +50,22 @@ def test_pollution_sources():
 
     assert "carbon_monoxide" in d
     assert "nitrogen_dioxide" in d
+
+
+def test_multi_sources_read():
+    x = traffic.Traffic()
+    s = x.get_source(0)
+    d0 = s.next()
+
+    s = x.get_source(448)
+    d = s.next()
+
+    assert d != d0
+    assert "avgSpeed" in d
+
+    x = pollution.Pollution()
+    s = x.get_source(0)
+    d = s.next()
+
+    assert d != d0
+    assert "carbon_monoxide" in d
