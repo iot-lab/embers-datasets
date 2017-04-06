@@ -15,14 +15,16 @@ class Traffic(object):
 
     tarball = "traffic.json"
     metadata = "traffic_metadata.json"
-    sources = {}
+
+    source_dir = SOURCE_DIR
 
     def __init__(self):
         self.tarball = Descriptor(__package__, self.tarball)
         self.metadata = Descriptor(__package__, self.metadata)
+        self.sources = {}
 
     def download(self):
-        if os.path.isdir(os.path.join(DEST_DIR, SOURCE_DIR)):
+        if os.path.isdir(os.path.join(DEST_DIR, self.source_dir)):
             return False
         orig_dir = os.path.abspath(os.curdir)
         os.path.isdir(DEST_DIR) or os.mkdir(DEST_DIR)
@@ -42,7 +44,7 @@ class Traffic(object):
             it = self.sources[device_id]
         except KeyError:
             metadata = self.get_metadata()[device_id]
-            it = FileSource(metadata["REPORT_ID"])
+            it = self.FileSource(metadata["REPORT_ID"])
             it.metadata = metadata
             self.sources[device_id] = it
         return it
@@ -57,9 +59,12 @@ class Traffic(object):
 
 class FileSource():
 
+    source_dir = SOURCE_DIR
+    source_filename = SOURCE_FILENAME
+
     def __init__(self, report_id):
-        fd = open(os.path.join(DEST_DIR, SOURCE_DIR,
-                  SOURCE_FILENAME.format(REPORT_ID=report_id)))
+        fd = open(os.path.join(DEST_DIR, self.source_dir,
+                  self.source_filename.format(REPORT_ID=report_id)))
         self.reader = csv.DictReader(fd)
 
     def __iter__(self):
@@ -67,6 +72,8 @@ class FileSource():
 
     def next(self):
         return self.reader.next()
+
+Traffic.FileSource = FileSource
 
 
 def get_traffic_metadata():
