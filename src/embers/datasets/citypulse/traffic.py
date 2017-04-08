@@ -1,79 +1,37 @@
-from ..lib.downloader import Downloader
-from ..lib.descriptor import Descriptor
+from base import IndexedFileSource
+from base import FileDatasource
+from base import DEST_DIR
 
 import os
 import csv
 
-DEST_DIR = __package__
 
 SOURCE_DIR = "traffic_june_sep" # in effect aug_sep_2014 (cf traffic.json)
 SOURCE_FILENAME = "trafficData{REPORT_ID}.csv"
 METADATA_FILENAME = "trafficMetaData.csv"
 
 
-class Traffic(object):
+class FileSource(IndexedFileSource):
+    source_dir = SOURCE_DIR
+    source_filename = SOURCE_FILENAME
+    key = "REPORT_ID"
+
+
+class Traffic(FileDatasource):
 
     tarball = "traffic.json"
     metadata = "traffic_metadata.json"
-
     source_dir = SOURCE_DIR
 
-    def __init__(self):
-        self.tarball = Descriptor(__package__, self.tarball)
-        self.metadata = Descriptor(__package__, self.metadata)
-        self.sources = {}
+    Source = FileSource
 
     def download(self):
-        if os.path.isdir(os.path.join(DEST_DIR, self.source_dir)):
-            return False
-        orig_dir = os.path.abspath(os.curdir)
-        os.path.isdir(DEST_DIR) or os.mkdir(DEST_DIR)
-        os.chdir(DEST_DIR)
-        self._download()
-        os.chdir(orig_dir)
-
-    def _download(self):
-        wget = Downloader(self.tarball.download_url)
-        wget.download()
-        wget.extract()
-        wget = Downloader(self.metadata.download_url)
-        wget.download()
-
-    def get_source(self, device_id):
-        try:
-            it = self.sources[device_id]
-        except KeyError:
-            metadata = self.get_metadata()[device_id]
-            it = self.FileSource(metadata["REPORT_ID"])
-            it.metadata = metadata
-            self.sources[device_id] = it
-        return it
+        FileDatasource.download(self)
+        self._metadata = metadata = get_traffic_metadata()
+        self.Source.index = [ m[self.Source.key] for m in metadata ]
 
     def get_metadata(self):
-        if not self._metadata:
-            self._metadata = get_traffic_metadata()
         return self._metadata
-
-    _metadata = []
-
-
-class FileSource():
-
-    source_dir = SOURCE_DIR
-    source_filename = SOURCE_FILENAME
-
-    def __init__(self, report_id):
-        fd = open(os.path.join(DEST_DIR, self.source_dir,
-                  self.source_filename.format(REPORT_ID=report_id)))
-        self.reader = csv.DictReader(fd)
-
-    def __iter__(self):
-        return self
-
-    def next(self):
-        return self.reader.next()
-
-Traffic.FileSource = FileSource
 
 
 def get_traffic_metadata():
