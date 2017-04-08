@@ -18,6 +18,21 @@ def test_citypulse(events):
     x.get_source
 
 
+@pytest.mark.parametrize("events", [
+    "traffic",
+    "parking",
+    "pollution",
+])
+def test_synthetic(events):
+    x = get_dataset("synthetic", events)
+
+    x.get_source
+
+    with pytest.raises(AttributeError):
+        x.download
+
+
+
 def get_dataset(dataset, event_type):
     package_name = "embers.datasets." + dataset + "." + event_type
     class_name = event_type.capitalize()
