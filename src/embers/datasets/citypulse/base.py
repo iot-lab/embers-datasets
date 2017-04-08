@@ -41,8 +41,10 @@ class FileDatasource(Datasource):
         orig_dir = os.path.abspath(os.curdir)
         os.path.isdir(DEST_DIR) or os.mkdir(DEST_DIR)
         os.chdir(DEST_DIR)
-        self._download()
-        os.chdir(orig_dir)
+        try:
+            self._download()
+        finally:
+            os.chdir(orig_dir)
 
     def _download(self):
         wget = Downloader(self.tarball.download_url)
