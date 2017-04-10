@@ -67,3 +67,12 @@ def test_multi_sources_read():
 
     assert d != d0
     assert "carbon_monoxide" in d
+
+
+def test_traffic_get_metadata():
+    x = traffic.Traffic()
+    md = x.get_metadata()
+
+    assert md[0]
+    assert md[448]
+    assert md[0]["REPORT_ID"]
