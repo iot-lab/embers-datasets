@@ -78,6 +78,13 @@ def test_traffic_get_metadata():
     assert md[0]["REPORT_ID"]
 
 
+def test_not_downloaded(monkeypatch, tmpdir):
+    monkeypatch.chdir(tmpdir)
+
+    x = traffic.Traffic()
+    assert not x.is_downloaded()
+
+
 def test_traffic_download_already_downloaded():
     x = traffic.Traffic()
     assert x.download() is False
