@@ -67,3 +67,31 @@ def test_multi_sources_read():
 
     assert d != d0
     assert "carbon_monoxide" in d
+
+
+def test_traffic_get_metadata():
+    x = traffic.Traffic()
+    md = x.get_metadata()
+
+    assert md[0]
+    assert md[448]
+    assert md[0]["REPORT_ID"]
+
+
+def test_not_downloaded(monkeypatch, tmpdir):
+    monkeypatch.chdir(tmpdir)
+
+    x = traffic.Traffic()
+    assert not x.is_downloaded()
+
+
+def test_traffic_download_already_downloaded():
+    x = traffic.Traffic()
+    assert x.download() is False
+
+
+def test_traffic_iter():
+    x = traffic.Traffic()
+    s = x.get_source(0)
+    for data in s:
+        assert data
