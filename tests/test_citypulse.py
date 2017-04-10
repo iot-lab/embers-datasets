@@ -76,3 +76,10 @@ def test_traffic_get_metadata():
     assert md[0]
     assert md[448]
     assert md[0]["REPORT_ID"]
+
+
+def test_traffic_iter():
+    x = traffic.Traffic()
+    s = x.get_source(0)
+    for data in s:
+        assert data
