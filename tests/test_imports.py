@@ -1,5 +1,7 @@
 import pytest
 
+from embers.datasets.lib.lookup import get_dataset
+
 
 def test_citypulse_traffic():
     import embers.datasets.citypulse.traffic as traffic
@@ -30,11 +32,3 @@ def test_synthetic(events):
 
     with pytest.raises(AttributeError):
         x.download
-
-
-
-def get_dataset(dataset, event_type):
-    package_name = "embers.datasets." + dataset + "." + event_type
-    class_name = event_type.capitalize()
-    package = __import__(package_name, fromlist=[class_name])
-    return package.__dict__[class_name]()
