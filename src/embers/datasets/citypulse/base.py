@@ -36,7 +36,7 @@ class FileDatasource(Datasource):
         Datasource.__init__(self)
 
     def download(self):
-        if os.path.isdir(os.path.join(DEST_DIR, self.source_dir)):
+        if self.is_downloaded():
             return False
         orig_dir = os.path.abspath(os.curdir)
         os.path.isdir(DEST_DIR) or os.mkdir(DEST_DIR)
@@ -52,6 +52,9 @@ class FileDatasource(Datasource):
         wget.extract()
         wget = Downloader(self.metadata.download_url)
         wget.download()
+
+    def is_downloaded(self):
+        return os.path.isdir(os.path.join(DEST_DIR, self.source_dir))
 
 
 
