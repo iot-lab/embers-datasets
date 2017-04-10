@@ -25,8 +25,10 @@ class Traffic(FileDatasource):
 
     Source = FileSource
 
-    def download(self):
-        FileDatasource.download(self)
+    def __init__(self):
+        FileDatasource.__init__(self)
+        if not self.is_downloaded():
+            return
         self._metadata = metadata = get_traffic_metadata()
         self.Source.index = [ m[self.Source.key] for m in metadata ]
 
