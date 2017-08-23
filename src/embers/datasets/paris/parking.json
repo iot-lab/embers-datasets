@@ -1,0 +1,9 @@
+{
+	"description": "City of Paris parking data (velib)",
+	"date": "now (live)",
+	"home": "https://opendata.paris.fr/explore/",
+	"sensor_type": "parking",
+	"data_type": "realtime",
+	"format": "json",
+	"download_url": "https://opendata.paris.fr/api/records/1.0/search/?dataset=stations-velib-disponibilites-en-temps-reel&rows=1226"
+}
