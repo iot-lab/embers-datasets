@@ -30,6 +30,6 @@ class _it:
             json = requests.get(self.url).json()
             data = json["records"][0]["fields"]
         except Exception as e:
-            data = "error fetching data: " + e
+            data = "error fetching data: {}".format(e)
 
         return { "data": data }
