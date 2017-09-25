@@ -11,8 +11,8 @@ existing datasets of various kinds for e.g. iotlab-injectors to use.
 
 The intent of this repository is twofold:
 
-1./ provide a catalogue of (and landing zone for) EMBERS datasets
-2./ propose a common framework for describing and provinding data
+ 1. provide a catalogue of (and landing zone for) EMBERS datasets
+ 2. propose a common framework for describing and provinding data
 
 
 Available datasets
