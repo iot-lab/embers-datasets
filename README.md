@@ -20,7 +20,7 @@ Available datasets
 
 The list of currently available datasets is as follows:
 
-	citypulse: pollution, traffic          / 455 devices  / historical
+	citypulse: pollution, traffic          / 449 devices  / historical
 	paris:     parking                     / 1226 devices / real-time
 	synthetic: parking, traffic, pollution / any nb of devices
 
