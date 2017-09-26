@@ -1,8 +1,11 @@
 import requests
+import threading
+import time
+
 from embers.datasets.lib import use_fiware_format
 
 
-URL = "https://opendata.paris.fr/api/records/1.0/search/?dataset=stations-velib-disponibilites-en-temps-reel&rows=1&start={device_id}"
+URL = "https://opendata.paris.fr/api/records/1.0/search/?dataset=stations-velib-disponibilites-en-temps-reel&rows=1226"
 
 class Parking:
 
@@ -13,7 +16,7 @@ class Parking:
             it = self.sources[device_id]
         except KeyError:
             it = _it()
-            it.url = URL.format(device_id=device_id)
+            it.id = device_id
             self.sources[device_id] = it
 
         return it
@@ -25,12 +28,11 @@ class Parking:
 
 
 class _it:
-    url = None
 
     def next(self):
         try:
-            json = requests.get(self.url).json()
-            data = json["records"][0]["fields"]
+            json = get_data()
+            data = json["records"][self.id]["fields"]
         except Exception as e:
             data = "error fetching data: {}".format(e)
 
@@ -39,6 +41,21 @@ class _it:
             print "fiware:\n{}".format(data)
 
         return { "data": data }
+
+
+class state:
+    lock = threading.Lock()
+    data = None
+    timestamp = 0
+
+
+def get_data():
+    with state.lock:
+        if state.timestamp < time.time() - 60:
+            json = requests.get(URL).json()
+            state.data = json
+            state.timestamp = time.time()
+        return state.data
 
 
 def to_fiware(data):
