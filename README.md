@@ -9,7 +9,7 @@ This is the EMBERS datasets repository
 This repository contains code for datasets "plugins" which expose
 existing datasets of various kinds for e.g. iotlab-injectors to use.
 
-The intent of this repository is twofold:
+The intent of this repository is two-fold:
 
  1. provide a catalogue of (and landing zone for) EMBERS datasets
  2. propose a common framework for describing and provinding data
@@ -25,6 +25,7 @@ The list of currently available datasets is as follows:
 	synthetic: parking, traffic, pollution / any nb of devices
 
 The "citypulse" dataset is file-based, it needs to be downloaded prior to use.
+To download a file-based dataset, use the iotlab-injectors `datasets` tool.
 The "paris" dataset says parking but this is the Velib bike-stations parking.
 The "synthetic" dataset is code-generated and provides simple numbered events.
 
@@ -47,7 +48,7 @@ in the following sections.
 Dataset "descriptors"
 ---------------------
 
-A dataset descriptor is nothing more than a json file, with rather generic
+A dataset "descriptor" is a simple json file, with rather generic
 and self describing fields.  The current proposal is a draft, which might
 need to be extended or refined as needed in the future.
 
@@ -69,7 +70,7 @@ A dataset "plugin" is an adapter for EMBERS datasets which offers a simple
 uniform interface to the iotlab-injectors toolset - or any other piece of
 python code that fancies using it.  Basically, a dataset exposes a set
 of "sensors", each providing a set of data "samples" which will be accessed
-in sequence.
+in sequence via and iterator.
 
 A dataset class is therefore expected to offer a `.get_source(id)` method,
 expected to return an iterator-like object offering a `.next()` method.
