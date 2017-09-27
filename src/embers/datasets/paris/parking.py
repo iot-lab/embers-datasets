@@ -38,7 +38,6 @@ class _it:
 
         if use_fiware_format:
             data = to_fiware(data)
-            print "fiware:\n{}".format(data)
 
         return { "data": data }
 
